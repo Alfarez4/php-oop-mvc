@@ -1,19 +1,20 @@
 <?php
-// Masukkan (include) kedua file kelas
+// Masukkan (include) semua file kelas dan interface
 require_once 'User.php';
+require_once 'LoginInterface.php'; // Penting: Muat Interface
 require_once 'Admin.php';
 
 // 1. Instansiasi Objek User Biasa
-$user1 = new User("Bima Egi Alfareza");
+$user1 = new User("Rani Permata");
 
-// 2. Instansiasi Objek Admin (Kelas Anak)
-$admin1 = new Admin("Citra Kirana");
+// 2. Instansiasi Objek Admin (Kelas Anak yang juga mengimplementasikan Interface)
+$admin1 = new Admin("Bima Egi Alfareza");
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Modul 4: Inheritance (Pewarisan)</title>
+    <title>Modul 5: Abstraction & Interface</title>
     <style>
         body { 
             font-family: 'Inter', sans-serif; 
@@ -53,30 +54,37 @@ $admin1 = new Admin("Citra Kirana");
             color: #e74c3c; 
             font-weight: bold; 
         }
+        .action { 
+            color: #16a085; 
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Modul 4: Inheritance (Pewarisan User dan Admin)</h1>
-
-    <h2>Pengguna Biasa (Kelas User)</h2>
-    <div class="output">
-        <p style="color: #27ae60; font-size: 1.1em;"><?php echo $user1->salam(); ?></p>
-        <p>Peran yang diwarisi: <span class="role-user"><?php echo $user1->getRole(); ?></span></p>
-    </div>
+    <h1>Modul 5: Abstraction & Interface (Kontrak Perilaku)</h1>
 
     <h2>Administrator (Kelas Admin)</h2>
     <div class="output">
-        <!-- Output dari metode yang telah di-override -->
-        <p style="color: #e74c3c; font-size: 1.1em;"><?php echo $admin1->salam(); ?></p>
-        <!-- Memanggil metode yang hanya dimiliki oleh Admin -->
-        <p><?php echo $admin1->kelolaSistem(); ?></p>
-        <p>Peran yang diwarisi: <span class="role-admin"><?php echo $admin1->getRole(); ?></span></p>
+        <!-- Panggilan metode yang diwarisi dan di-override -->
+        <p><?php echo $admin1->salam(); ?></p>
+
+        <!-- Panggilan metode dari Interface -->
+        <p class="action">Action 1: <?php echo $admin1->login(); ?></p>
+        <p class="action">Action 2: <?php echo $admin1->kelolaSistem(); ?></p>
+        <p class="action">Action 3: <?php echo $admin1->logout(); ?></p>
+    </div>
+
+    <h2>Pengguna Biasa (Kelas User)</h2>
+    <div class="output">
+        <p><?php echo $user1->salam(); ?></p>
+        <!-- PERHATIKAN: User TIDAK memiliki metode login() atau logout() -->
+        <p style="color: red;">*Objek User tidak dapat memanggil login() karena tidak mengimplementasikan LoginInterface.</p>
     </div>
 
     <p>
-        <em>(Perhatikan bahwa objek Admin memiliki metode <strong>salam()</strong> yang berbeda dan dapat menggunakan metode dasar <strong>getRole()</strong> dari kelas User.)</em>
+        <em>(Kelas Admin kini memiliki semua metode dari User PLUS semua metode yang diwajibkan oleh LoginInterface.)</em>
     </p>
 </div>
 
