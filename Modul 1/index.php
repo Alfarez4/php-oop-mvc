@@ -54,3 +54,5 @@ cara menggunakannya.)</em>
    
  </body> 
  </html>
+
+ <!-- MODUL 1: KONSEP DASAR OOP DI PHP  -->
