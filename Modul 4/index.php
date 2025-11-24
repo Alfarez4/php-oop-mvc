@@ -82,3 +82,5 @@ $admin1 = new Admin("Citra Kirana");
 
 </body>
 </html>
+
+<!-- MODUL 4: INHERITANCE (PEWARISAN) -->
