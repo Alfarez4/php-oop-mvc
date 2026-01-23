@@ -30,15 +30,6 @@
              value="<?= $data['mk']['sks'] ?? ''; ?>" min="1" max="6" required>
     </div>
 
-    <div class="mb-3">
-      <label for="status_id" class="form-label">Status</label>
-      <select class="form-select" id="status_id" name="status_id">
-        <?php $status = $data['mk']['status_id'] ?? 1; ?>
-        <option value="1" <?= $status == 1 ? 'selected' : ''; ?>>Aktif</option>
-        <option value="0" <?= $status == 0 ? 'selected' : ''; ?>>Nonaktif</option>
-      </select>
-    </div>
-
     <button type="submit" class="btn btn-primary">Simpan</button>
     <a href="<?= BASEURL; ?>/matakuliah" class="btn btn-secondary">Batal</a>
   </form>
